@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.math.BigDecimal; // <-- Olha o import do BigDecimal aqui!
 
 @Entity
 public class Procedimento {
@@ -14,7 +15,7 @@ public class Procedimento {
 
 	private String nome;
 	private String descricao;
-	private Double valorBase;
+	private BigDecimal valorBase;
 
 	public Procedimento() {
 	}
@@ -43,11 +44,11 @@ public class Procedimento {
 		this.descricao = descricao;
 	}
 
-	public Double getValorBase() {
+	public BigDecimal getValorBase() {
 		return valorBase;
 	}
 
-	public void setValorBase(Double valorBase) {
+	public void setValorBase(BigDecimal valorBase) {
 		this.valorBase = valorBase;
 	}
 }

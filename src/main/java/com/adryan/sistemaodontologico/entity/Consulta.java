@@ -16,8 +16,7 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dataHora;
-    private String status; 
-    
+    private String status;
     private String observacao;
 
     @ManyToOne

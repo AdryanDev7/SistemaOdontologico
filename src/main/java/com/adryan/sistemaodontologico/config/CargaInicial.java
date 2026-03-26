@@ -1,5 +1,6 @@
 package com.adryan.sistemaodontologico.config;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -46,31 +47,37 @@ public class CargaInicial implements CommandLineRunner {
             elisa.setCro("RJ-59828");
             elisa.setTelefone("22 99999-8888");
             dentistaRepo.save(elisa);
-            
+
             // 2. Criando um Paciente Teste
             Paciente p1 = new Paciente();
             p1.setNome("Adryan Lima");
             p1.setEmail("adryan@email.com");
             p1.setCpf("123.456.789-00");
             p1.setTelefone("21 98888-7777");
-            p1.setAnamnese("Paciente sem alergias, histórico de bruxismo.");
+// Substituímos o setAnamnese pelos campos novos:
+            p1.setAlergias("Nenhuma");
+            p1.setQueixaPrincipal("Paciente relata histórico de bruxismo.");
             pacienteRepo.save(p1);
 
-            // 3. Criando Procedimentos Padrão
+// 3. Criando Procedimentos Padrão
             Procedimento proc1 = new Procedimento();
             proc1.setNome("Limpeza Completa");
             proc1.setDescricao("Profilaxia e remoção de tártaro");
-            proc1.setValorBase(150.00);
+// Transformamos o Double em BigDecimal:
+            proc1.setValorBase(new BigDecimal("150.00"));
+            procedimentoRepo.save(proc1);
 
             Procedimento proc2 = new Procedimento();
             proc2.setNome("Restauração Resina");
             proc2.setDescricao("Restauração simples (1 face)");
-            proc2.setValorBase(200.00);
-            
+            proc2.setValorBase(new BigDecimal("200.00"));
+            procedimentoRepo.save(proc2);
+
             Procedimento proc3 = new Procedimento();
             proc3.setNome("Clareamento");
             proc3.setDescricao("Clareamento caseiro com moldeiras");
-            proc3.setValorBase(800.00);
+            proc3.setValorBase(new BigDecimal("600.00")); // Chutei o valor da linha 73!
+            procedimentoRepo.save(proc3);
 
             procedimentoRepo.saveAll(Arrays.asList(proc1, proc2, proc3));
             

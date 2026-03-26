@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.math.BigDecimal; // <-- Import do BigDecimal para dinheiro!
 
 @Entity
 public class ConsultaProcedimento {
@@ -23,7 +24,8 @@ public class ConsultaProcedimento {
 	private Procedimento procedimento;
 
 	private Integer quantidade;
-	private Double valorCobrado;
+	private BigDecimal valorCobrado;
+
 	private String denteRegiao;
 	private String observacao;
 
@@ -62,11 +64,11 @@ public class ConsultaProcedimento {
 		this.quantidade = quantidade;
 	}
 
-	public Double getValorCobrado() {
+	public BigDecimal getValorCobrado() {
 		return valorCobrado;
 	}
 
-	public void setValorCobrado(Double valorCobrado) {
+	public void setValorCobrado(BigDecimal valorCobrado) {
 		this.valorCobrado = valorCobrado;
 	}
 

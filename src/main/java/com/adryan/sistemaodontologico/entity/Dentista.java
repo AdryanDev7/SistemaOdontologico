@@ -3,9 +3,12 @@ package com.adryan.sistemaodontologico.entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.adryan.sistemaodontologico.enums.Especialidades; // <-- Importamos o seu Enum aqui!
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +23,7 @@ public class Dentista {
 
     @Column(nullable = false)
     private String nome;
-    
+
     @Column(unique = true)
     private String email;
     private String senha;
@@ -29,6 +32,10 @@ public class Dentista {
     private String cro;
 
     private String telefone;
+
+    @Enumerated(EnumType.STRING)
+    private Especialidades especialidade;
+
     @JsonIgnore
     @OneToMany(mappedBy = "dentista")
     private List<Consulta> consultas;
@@ -82,6 +89,14 @@ public class Dentista {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Especialidades getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(Especialidades especialidade) {
+        this.especialidade = especialidade;
     }
 
     public List<Consulta> getConsultas() {
