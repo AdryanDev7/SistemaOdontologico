@@ -1,6 +1,7 @@
 package com.adryan.sistemaodontologico.controller;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*; // Importa PathVariable, PutMapping, etc.
 import com.adryan.sistemaodontologico.entity.Paciente;
@@ -20,6 +21,11 @@ public class PacienteController {
 	@GetMapping
 	public List<Paciente> listarTodos() {
 		return repository.findAll();
+	}
+
+	@GetMapping("/estatisticas")
+	public Map<String, Long> estatisticas() {
+		return Map.of("totalPacientes", repository.count());
 	}
 
 	@PostMapping
