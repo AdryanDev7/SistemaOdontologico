@@ -14,7 +14,7 @@ import com.adryan.sistemaodontologico.repository.ProcedimentoRepository;
 
 @RestController
 @RequestMapping("/procedimentos")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProcedimentoController {
 
 	private final ProcedimentoRepository repository;

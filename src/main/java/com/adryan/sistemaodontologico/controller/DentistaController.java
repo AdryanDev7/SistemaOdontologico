@@ -14,7 +14,7 @@ import com.adryan.sistemaodontologico.repository.DentistaRepository;
 
 @RestController
 @RequestMapping("/dentistas")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DentistaController {
 
     private final DentistaRepository repository;

@@ -17,7 +17,7 @@ import com.adryan.sistemaodontologico.repository.ConsultaRepository;
 
 @RestController
 @RequestMapping("/consultas")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ConsultaController {
 
 	private final ConsultaRepository repository;
