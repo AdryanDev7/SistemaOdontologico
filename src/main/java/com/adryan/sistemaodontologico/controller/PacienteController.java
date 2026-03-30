@@ -72,4 +72,14 @@ public class PacienteController {
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
+
+	@DeleteMapping("/{id:\\d+}")
+	public ResponseEntity<Void> excluir(@PathVariable Long id) {
+		if (!repository.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+
+		repository.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
 }
