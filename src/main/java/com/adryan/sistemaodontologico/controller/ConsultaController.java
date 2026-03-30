@@ -1,6 +1,9 @@
 package com.adryan.sistemaodontologico.controller;
 
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +29,15 @@ public class ConsultaController {
 	@GetMapping
 	public List<Consulta> listarTodas() {
 		return repository.findAll();
+	}
+
+	@GetMapping("/estatisticas")
+	public Map<String, Long> getEstatisticas() {
+		LocalDate hoje = LocalDate.now();
+		LocalDateTime inicio = hoje.atStartOfDay();
+		LocalDateTime fim = hoje.plusDays(1).atStartOfDay();
+		long totalConsultasHoje = repository.countByDataHoraBetween(inicio, fim);
+		return Map.of("totalConsultasHoje", totalConsultasHoje);
 	}
 
 	@PostMapping
