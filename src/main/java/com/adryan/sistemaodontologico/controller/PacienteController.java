@@ -9,7 +9,7 @@ import com.adryan.sistemaodontologico.repository.PacienteRepository;
 
 @RestController
 @RequestMapping("/pacientes")
-@CrossOrigin(origins = "http://localhost:5175")
+@CrossOrigin("*")
 public class PacienteController {
 
 	private final PacienteRepository repository;
@@ -24,7 +24,7 @@ public class PacienteController {
 	}
 
 	@GetMapping("/estatisticas")
-	public Map<String, Long> estatisticas() {
+	public Map<String, Long> getEstatisticas() {
 		return Map.of("totalPacientes", repository.count());
 	}
 
@@ -33,7 +33,7 @@ public class PacienteController {
 		return repository.save(novoPaciente);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/{id:\\d+}")
 	public ResponseEntity<Paciente> buscarPorId(@PathVariable Long id) {
 		return repository.findById(id)
 				.map(ResponseEntity::ok)
