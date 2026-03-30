@@ -3,6 +3,7 @@ package com.adryan.sistemaodontologico.controller;
 import java.util.List;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*; // Importa PathVariable, PutMapping, etc.
 import com.adryan.sistemaodontologico.entity.Paciente;
 import com.adryan.sistemaodontologico.repository.PacienteRepository;
@@ -73,13 +74,15 @@ public class PacienteController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 
+	@Transactional
 	@DeleteMapping("/{id:\\d+}")
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
-		if (!repository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-
-		repository.deleteById(id);
-		return ResponseEntity.noContent().build();
+		return repository.findById(id)
+				.map(p -> {
+					// delete em cima da entidade gerenciada para respeitar cascade (consultas + procedimentos)
+					repository.delete(p);
+					return ResponseEntity.noContent().<Void>build();
+				})
+				.orElse(ResponseEntity.notFound().build());
 	}
 }
